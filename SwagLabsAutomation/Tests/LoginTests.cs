@@ -15,5 +15,16 @@ namespace SwagLabsAutomation.Tests
 
             Assert.That(driver.Url, Does.Contain("inventory"), "Login was not successful – inventory page not loaded.");
         }
+        [Test]
+        public void Login_WithInvalidCredentials_ShouldShowError()
+        {
+            driver.Navigate().GoToUrl("https://www.saucedemo.com/");
+
+            var loginPage = new LoginPage(driver);
+            loginPage.Login("wrong_user", "wrong_pass");
+
+            Assert.IsTrue(loginPage.IsErrorVisible(), "Error message was not displayed for invalid login.");
+        }
+
     }
 }

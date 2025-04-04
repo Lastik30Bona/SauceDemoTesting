@@ -7,6 +7,7 @@ namespace SwagLabsAutomation.Pages
         private By UsernameInput => By.Id("user-name");
         private By PasswordInput => By.Id("password");
         private By LoginButton => By.Id("login-button");
+        private By ErrorMessage => By.CssSelector("h3[data-test='error']");
 
         public LoginPage(IWebDriver driver) : base(driver) { }
 
@@ -15,6 +16,11 @@ namespace SwagLabsAutomation.Pages
             Type(UsernameInput, username);
             Type(PasswordInput, password);
             Click(LoginButton);
+        }
+
+        public bool IsErrorVisible()
+        {
+            return IsVisible(ErrorMessage);
         }
     }
 }
